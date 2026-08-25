@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Subramaniam's Cafe — Menu</title>
+  <meta name="description" content="Subramaniam's Cafe — Full menu. South Indian tiffin, dosa, coffee, Chinese, North curries and more."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:         #0e0c09;
+      --bg2:        #131008;
+      --surface:    #1a1611;
+      --card:       #201c15;
+      --card-h:     #272118;
+      --border:     rgba(212,168,83,0.1);
+      --border-h:   rgba(212,168,83,0.28);
+      --gold:       #c9973a;
+      --gold-l:     #e0b96a;
+      --gold-d:     #9a7020;
+      --cream:      #f0e8d8;
+      --cream-m:    #b8a98a;
+      --cream-d:    #7a6a50;
+      --cheap-bg:   rgba(134,179,120,0.1);
+      --cheap-tx:   #8fb381;
+      --cheap-br:   rgba(134,179,120,0.22);
+      --mid-bg:     rgba(201,151,58,0.1);
+      --mid-tx:     #c9973a;
+      --mid-br:     rgba(201,151,58,0.22);
+      --prem-bg:    rgba(185,107,87,0.1);
+      --prem-tx:    #c4785a;
+      --prem-br:    rgba(185,107,87,0.22);
+      --radius:     10px;
+      --nav-h:      52px;
+    }
+    html{scroll-behavior:smooth}
+    body{
+      font-family:'DM Sans',sans-serif;
+      background:var(--bg);color:var(--cream);
+      min-height:100vh;
+    }
+
+    /* ─── HERO ─────────────────────────────── */
+    .hero{
+      position:relative;overflow:hidden;
+      background:var(--bg2);
+      padding:64px 24px 52px;
+      text-align:center;
+      border-bottom:1px solid var(--border);
+    }
+    .hero::before{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(201,151,58,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 40% at 80% 100%, rgba(201,151,58,0.05) 0%, transparent 60%);
+      pointer-events:none;
+    }
+    /* decorative lines */
+    .hero::after{
+      content:'';position:absolute;left:50%;top:0;transform:translateX(-50%);
+      width:1px;height:48px;
+      background:linear-gradient(180deg,transparent,rgba(201,151,58,0.4));
+    }
+
+    .brand{position:relative;z-index:1}
+    .brand-tag{
+      display:inline-flex;align-items:center;gap:8px;
+      color:var(--gold);font-size:11px;letter-spacing:3px;
+      text-transform:uppercase;font-weight:500;margin-bottom:20px;font-family:'DM Sans',sans-serif;
+    }
+    .brand-tag::before,.brand-tag::after{
+      content:'';display:block;width:28px;height:1px;background:var(--gold-d);
+    }
+    .brand-name{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(2.4rem,7vw,4.8rem);
+      font-weight:600;color:var(--cream);
+      letter-spacing:0.02em;line-height:1.05;margin-bottom:6px;
+    }
+    .brand-name em{color:var(--gold);font-style:italic}
+    .brand-sub{
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(1rem,2.5vw,1.3rem);
+      color:var(--cream-m);letter-spacing:0.15em;
+      text-transform:uppercase;font-weight:400;margin-bottom:32px;
+    }
+
+    /* ornament */
+    .ornament{
+      display:flex;align-items:center;justify-content:center;
+      gap:12px;margin:0 auto 36px;opacity:.5;
+    }
+    .ornament-line{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+    .ornament-line.r{background:linear-gradient(90deg,var(--gold),transparent)}
+    .ornament-diamond{
+      width:6px;height:6px;background:var(--gold);
+      transform:rotate(45deg);flex-shrink:0;
+    }
+    .ornament-dot{width:3px;height:3px;background:var(--gold-d);border-radius:50%;flex-shrink:0}
+
+    /* stats row */
+    .stats{
+      display:inline-flex;gap:0;background:rgba(255,255,255,0.03);
+      border:1px solid var(--border);border-radius:999px;overflow:hidden;margin-bottom:32px;
+    }
+    .stat{padding:10px 22px;font-size:13px;color:var(--cream-m)}
+    .stat strong{color:var(--gold);font-weight:600;display:block;font-size:17px;line-height:1.2}
+    .stat+.stat{border-left:1px solid var(--border)}
+
+    /* ─── CONTROLS ─────────────────────────── */
+    .controls{
+      max-width:860px;margin:0 auto;
+      display:flex;flex-wrap:wrap;align-items:center;gap:10px;
+    }
+    .search-wrap{position:relative;flex:1;min-width:220px}
+    .search-wrap input{
+      width:100%;background:rgba(255,255,255,0.04);
+      border:1px solid var(--border);border-radius:8px;
+      padding:11px 42px 11px 16px;color:var(--cream);
+      font-family:'DM Sans',sans-serif;font-size:14px;outline:none;
+      transition:border-color .2s,background .2s;letter-spacing:.01em;
+    }
+    .search-wrap input::placeholder{color:var(--cream-d)}
+    .search-wrap input:focus{border-color:rgba(201,151,58,0.45);background:rgba(255,255,255,0.06)}
+    .search-wrap .si{
+      position:absolute;right:13px;top:50%;transform:translateY(-50%);
+      color:var(--cream-d);font-size:15px;pointer-events:none;
+    }
+
+    .ctrl-group{display:flex;gap:6px}
+    .view-btn{
+      padding:9px 16px;border-radius:8px;border:1px solid var(--border);
+      background:transparent;color:var(--cream-d);font-family:'DM Sans',sans-serif;
+      font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;
+      display:flex;align-items:center;gap:6px;white-space:nowrap;
+    }
+    .view-btn:hover{border-color:var(--gold-d);color:var(--gold)}
+    .view-btn.active{background:rgba(201,151,58,0.12);border-color:rgba(201,151,58,0.45);color:var(--gold);font-weight:600}
+
+    .sort-select{
+      background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;
+      color:var(--cream-m);font-family:'DM Sans',sans-serif;font-size:13px;
+      padding:9px 14px;outline:none;cursor:pointer;
+    }
+    .sort-select option{background:#201c15;color:var(--cream)}
+
+    /* price filters */
+    .price-bar{
+      max-width:860px;margin:12px auto 0;
+      display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    }
+    .price-bar-label{font-size:12px;color:var(--cream-d);letter-spacing:.5px;text-transform:uppercase;font-weight:500}
+    .pf-btn{
+      padding:6px 16px;border-radius:6px;border:1px solid var(--border);
+      background:transparent;color:var(--cream-d);font-family:'DM Sans',sans-serif;
+      font-size:12px;font-weight:500;cursor:pointer;transition:all .2s;letter-spacing:.3px;
+    }
+    .pf-btn:hover{border-color:var(--gold-d);color:var(--cream-m)}
+    .pf-btn.active{background:rgba(201,151,58,0.12);border-color:rgba(201,151,58,0.45);color:var(--gold)}
+
+    /* legend */
+    .legend-bar{
+      max-width:860px;margin:10px auto 0;
+      display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    }
+    .legend-item{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--cream-d)}
+    .ldot{width:8px;height:8px;border-radius:2px}
+
+    /* ─── STICKY NAV ─────────────────────── */
+    .nav-sticky{
+      position:sticky;top:0;z-index:100;
+      background:rgba(14,12,9,0.92);backdrop-filter:blur(24px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-scroll{
+      display:flex;gap:4px;overflow-x:auto;padding:9px 14px;
+      scrollbar-width:none;
+    }
+    .nav-scroll::-webkit-scrollbar{display:none}
+    .nav-btn{
+      white-space:nowrap;background:transparent;
+      border:1px solid transparent;
+      color:var(--cream-d);font-family:'DM Sans',sans-serif;
+      font-size:12.5px;font-weight:500;
+      padding:6px 14px;border-radius:6px;
+      cursor:pointer;transition:all .2s;flex-shrink:0;
+      display:flex;align-items:center;gap:5px;
+    }
+    .nav-btn:hover{background:rgba(255,255,255,0.04);color:var(--cream-m)}
+    .nav-btn.active{
+      background:rgba(201,151,58,0.1);border-color:rgba(201,151,58,0.35);
+      color:var(--gold);font-weight:600;
+    }
+    .nav-btn .cnt{
+      font-size:10px;color:var(--cream-d);background:rgba(255,255,255,0.06);
+      border-radius:4px;padding:1px 5px;font-weight:600;
+    }
+    .nav-btn.active .cnt{background:rgba(201,151,58,0.2);color:var(--gold-d)}
+
+    /* ─── LAYOUT ─────────────────────────── */
+    .layout{display:flex;max-width:1440px;margin:0 auto}
+
+    /* Sidebar */
+    .sidebar{
+      width:210px;flex-shrink:0;
+      position:sticky;top:var(--nav-h);
+      height:calc(100vh - var(--nav-h));
+      overflow-y:auto;padding:24px 0 24px 14px;
+      scrollbar-width:thin;scrollbar-color:var(--border) transparent;
+      display:none;border-right:1px solid var(--border);
+    }
+    @media(min-width:1080px){.sidebar{display:block}}
+    .sb-head{
+      font-size:10px;font-weight:600;letter-spacing:2px;
+      text-transform:uppercase;color:var(--cream-d);
+      margin-bottom:12px;padding:0 4px;
+    }
+    .sb-link{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:8px 10px;border-radius:7px;cursor:pointer;
+      font-size:13px;color:var(--cream-d);transition:all .2s;
+      margin-bottom:1px;text-decoration:none;
+      border:1px solid transparent;
+    }
+    .sb-link:hover{background:rgba(255,255,255,0.03);color:var(--cream-m)}
+    .sb-link.active{background:rgba(201,151,58,0.08);border-color:var(--border);color:var(--gold)}
+    .sb-link-left{display:flex;align-items:center;gap:7px;font-size:13px}
+    .sb-link-right{font-size:10px;color:var(--cream-d);background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px}
+
+    /* ─── MAIN ─────────────────────────────── */
+    .content{flex:1;min-width:0;padding:36px 24px 100px}
+
+    /* ─── SECTION ─────────────────────────── */
+    .menu-section{margin-bottom:52px;animation:fadeUp .3s ease both}
+    @keyframes fadeUp{
+      from{opacity:0;transform:translateY(12px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .section-header{
+      display:flex;align-items:center;gap:14px;
+      margin-bottom:20px;
+    }
+    .section-icon{font-size:22px;line-height:1;flex-shrink:0}
+    .section-title{
+      font-family:'Cormorant Garamond',serif;
+      font-size:1.55rem;font-weight:600;
+      color:var(--cream);letter-spacing:.02em;
+    }
+    .section-count{
+      font-size:11px;color:var(--cream-d);
+      background:rgba(255,255,255,0.04);
+      border:1px solid var(--border);
+      padding:3px 9px;border-radius:5px;font-weight:500;
+      letter-spacing:.3px;margin-left:auto;flex-shrink:0;
+    }
+    .section-divider{
+      width:100%;height:1px;margin-bottom:20px;
+      background:linear-gradient(90deg,rgba(201,151,58,0.25) 0%,transparent 80%);
+    }
+
+    /* ─── CARD VIEW ─────────────────────────── */
+    .items-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+      gap:8px;
+    }
+    .item-card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:14px 15px;
+      display:flex;align-items:flex-start;justify-content:space-between;gap:10px;
+      transition:background .18s,border-color .18s,transform .18s,box-shadow .18s;
+      position:relative;
+    }
+    .item-card::before{
+      content:'';position:absolute;left:0;top:20%;bottom:20%;
+      width:2px;border-radius:2px;background:transparent;
+      transition:background .18s;
+    }
+    .item-card:hover{
+      background:var(--card-h);border-color:var(--border-h);
+      transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,0.35);
+    }
+    .item-card:hover::before{background:var(--gold-d)}
+    .item-name{
+      font-size:13.5px;font-weight:400;color:var(--cream);
+      line-height:1.45;letter-spacing:.01em;
+    }
+    .item-name mark{
+      background:rgba(201,151,58,0.2);color:var(--gold);
+      border-radius:3px;padding:0 2px;font-style:normal;
+    }
+    .item-price{
+      font-size:13.5px;font-weight:600;white-space:nowrap;
+      padding:3px 9px;border-radius:6px;flex-shrink:0;
+      font-family:'DM Sans',sans-serif;
+    }
+    .price-cheap{background:var(--cheap-bg);color:var(--cheap-tx);border:1px solid var(--cheap-br)}
+    .price-mid  {background:var(--mid-bg);  color:var(--mid-tx);  border:1px solid var(--mid-br)}
+    .price-prem {background:var(--prem-bg); color:var(--prem-tx); border:1px solid var(--prem-br)}
+
+    /* ─── LIST VIEW ─────────────────────────── */
+    .items-list{
+      background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+      overflow:hidden;
+    }
+    .item-row{
+      display:flex;align-items:center;justify-content:space-between;gap:14px;
+      padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.04);
+      transition:background .15s;
+    }
+    .item-row:last-child{border-bottom:none}
+    .item-row:hover{background:rgba(255,255,255,0.025)}
+    .item-row .item-name{font-size:13.5px;font-weight:400;color:var(--cream)}
+    .item-row .item-price{font-size:13px;padding:2px 9px}
+    .item-row-idx{
+      font-size:11px;color:var(--cream-d);min-width:22px;
+      font-family:'DM Sans',sans-serif;font-weight:300;
+    }
+
+    /* ─── NO RESULTS ─────────────────────────── */
+    .no-results{text-align:center;padding:80px 20px;display:none}
+    .no-results.show{display:block}
+    .no-results-icon{font-size:40px;opacity:.4;margin-bottom:12px}
+    .no-results p{color:var(--cream-d);font-size:14px}
+
+    /* ─── FOOTER ─────────────────────────────── */
+    footer{
+      border-top:1px solid var(--border);
+      padding:28px 24px;
+      display:flex;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;gap:12px;
+      max-width:1440px;margin:0 auto;
+    }
+    footer p{color:var(--cream-d);font-size:12.5px;letter-spacing:.3px}
+    footer p span{color:var(--gold)}
+    .print-btn{
+      background:rgba(201,151,58,0.08);border:1px solid rgba(201,151,58,0.25);
+      color:var(--gold);padding:7px 16px;border-radius:7px;cursor:pointer;
+      font-family:'DM Sans',sans-serif;font-size:12.5px;font-weight:500;
+      transition:all .2s;
+    }
+    .print-btn:hover{background:rgba(201,151,58,0.15);border-color:rgba(201,151,58,0.45)}
+
+    /* ─── SCROLL TOP ─────────────────────────── */
+    #scrollTop{
+      position:fixed;bottom:24px;right:24px;
+      width:40px;height:40px;
+      background:rgba(201,151,58,0.12);
+      border:1px solid rgba(201,151,58,0.35);
+      color:var(--gold);border-radius:8px;
+      font-size:16px;font-weight:700;cursor:pointer;
+      display:none;align-items:center;justify-content:center;
+      z-index:200;transition:all .2s;
+    }
+    #scrollTop.show{display:flex}
+    #scrollTop:hover{background:rgba(201,151,58,0.22)}
+
+    /* ─── PRINT ─────────────────────────────── */
+    @media print{
+      .nav-sticky,.sidebar,.controls,.price-bar,.legend-bar,#scrollTop,footer .print-btn{display:none!important}
+      body{background:#fff;color:#1a1208}
+      .hero{background:#fff;border-bottom:2px solid #c9973a;padding:20px}
+      .hero::before,.hero::after{display:none}
+      .brand-name{color:#1a1208;font-size:28px}
+      .brand-name em{color:#c9973a}
+      .brand-sub,.brand-tag{color:#7a6a50}
+      .ornament,.stats{display:none}
+      .content{padding:12px 0}
+      .section-title{color:#1a1208}
+      .section-divider{background:#c9973a}
+      .item-card{background:transparent!important;border-color:#e0d0b0!important;transform:none!important;box-shadow:none!important}
+      .item-card::before{display:none}
+      .items-grid{grid-template-columns:repeat(3,1fr);gap:4px}
+      .item-name{font-size:11px;color:#1a1208}
+      .item-price{font-size:11px}
+      .price-cheap{color:#166534;background:#f0fdf4;border-color:#bbf7d0}
+      .price-mid  {color:#92400e;background:#fffbeb;border-color:#fde68a}
+      .price-prem {color:#991b1b;background:#fef2f2;border-color:#fecaca}
+      footer{border-top:1px solid #e0d0b0}
+      footer p{color:#7a6a50}
+    }
+
+    @media(max-width:640px){
+      .items-grid{grid-template-columns:1fr 1fr}
+      .stats{flex-direction:column;border-radius:12px}
+      .stat+.stat{border-left:none;border-top:1px solid var(--border)}
+      .controls{flex-direction:column;align-items:stretch}
+      .ctrl-group{flex-wrap:wrap}
+    }
+    @media(max-width:380px){
+      .items-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<header class="hero">
+  <div class="brand">
+    <div class="brand-tag">Est. Since Always</div>
+    <h1 class="brand-name"><em>Subramaniam's</em> Cafe</h1>
+    <p class="brand-sub">Full Menu</p>
+
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-dot"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-dot"></div>
+      <div class="ornament-line r"></div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><strong id="totalCount">0</strong>Items</div>
+      <div class="stat"><strong id="catCount">0</strong>Categories</div>
+      <div class="stat"><strong>₹20</strong>Starting from</div>
+    </div>
+
+    <div class="controls">
+      <div class="search-wrap">
+        <input type="text" id="searchInput" placeholder="Search any dish…" autocomplete="off"/>
+        <span class="si">⌕</span>
+      </div>
+      <div class="ctrl-group">
+        <button class="view-btn active" id="btnCard" onclick="setView('card')">⊞ Cards</button>
+        <button class="view-btn" id="btnList" onclick="setView('list')">☰ List</button>
+      </div>
+      <select class="sort-select" id="sortSelect" onchange="render()">
+        <option value="default">Default order</option>
+        <option value="asc">Price ↑ Low first</option>
+        <option value="desc">Price ↓ High first</option>
+        <option value="alpha">A → Z</option>
+      </select>
+    </div>
+
+    <div class="price-bar">
+      <span class="price-bar-label">Filter</span>
+      <button class="pf-btn active" onclick="setPF(this,'all')">All prices</button>
+      <button class="pf-btn" onclick="setPF(this,'cheap')">Under ₹50</button>
+      <button class="pf-btn" onclick="setPF(this,'mid')">₹50 – ₹100</button>
+      <button class="pf-btn" onclick="setPF(this,'prem')">₹100+</button>
+    </div>
+
+    <div class="legend-bar">
+      <div class="legend-item"><div class="ldot" style="background:var(--cheap-tx)"></div>Under ₹50</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--mid-tx)"></div>₹50 – ₹100</div>
+      <div class="legend-item"><div class="ldot" style="background:var(--prem-tx)"></div>Above ₹100</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── STICKY NAV ── -->
+<nav class="nav-sticky">
+  <div class="nav-scroll" id="navScroll"></div>
+</nav>
+
+<!-- ── LAYOUT ── -->
+<div class="layout">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sb-head">Categories</div>
+    <div id="sidebarLinks"></div>
+  </aside>
+
+  <main class="content" id="menuContent">
+    <div class="no-results" id="noResults">
+      <div class="no-results-icon">✦</div>
+      <p>No items match your search or filter.</p>
+    </div>
+  </main>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>All prices inclusive of taxes &nbsp;·&nbsp; <span>Subramaniam's Cafe</span> &nbsp;·&nbsp; Menu subject to change</p>
+  <button class="print-btn" onclick="window.print()">⎙ Print Menu</button>
+</footer>
+
+<button id="scrollTop" title="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+var MENU=[
+  {id:"coffee-tea",icon:"☕",title:"Coffee & Tea",items:[
+    {n:"Coffee",p:20},{n:"Tea",p:20},{n:"Black Tea",p:20},{n:"Ginger Tea",p:25},
+    {n:"Hot Badam Milk",p:35},{n:"Bournvita",p:35},{n:"Horlicks",p:35},{n:"Boost",p:35},
+    {n:"Tea (Jaggery)",p:25},{n:"Milk (one Cup)",p:20},{n:"Coffee (Jaggery)",p:25},
+    {n:"Black Coffee (Jaggery)",p:25},{n:"Black Coffee",p:20},{n:"Masala Tea",p:25},
+    {n:"Lemon Tea",p:25},{n:"Ginger Coffee",p:25},{n:"Green Tea",p:25},{n:"Kashaya",p:25}
+  ]},
+  {id:"snacks",icon:"🥟",title:"Snacks",items:[
+    {n:"Maddur Vada",p:35},{n:"Rava Vada (3 pcs)",p:35},{n:"French Fries",p:115},
+    {n:"Undee Pakoda (3 pcs)",p:45},{n:"Mangalore Bajji (3 pcs)",p:45},{n:"Mangalore Buns",p:45},
+    {n:"Bonda Soup (2 pcs)",p:60},{n:"Mixed Bajji (5 pcs)",p:65},{n:"Onion Bonda (3 pcs)",p:45},
+    {n:"Bonda (3 pcs)",p:45},{n:"Palak / Onion / Ragi Pakoda",p:65},
+    {n:"Paddu-kuzhi Paniyaram Jamun (2 pcs)",p:45}
+  ]},
+  {id:"parotta",icon:"🫓",title:"Parotta with Gravy",items:[
+    {n:"Wheat Layered Parotta (2 pcs)",p:95},{n:"TN Parotta (2 pcs)",p:95},
+    {n:"Paneer Kothu Parotta",p:185},{n:"Kothu Parota",p:135},
+    {n:"Nool Parotta",p:115},{n:"Bun Parota",p:105},
+    {n:"Butter Bun Parota",p:125},{n:"Ceylon Parotta",p:110},
+    {n:"Masala Parota",p:135},{n:"Banana Leaf Parotta",p:155}
+  ]},
+  {id:"tiffin",icon:"🍛",title:"Tiffin & Breakfast",items:[
+    {n:"Kesari Bath",p:40},{n:"Khara Bath",p:35},{n:"Chow Chow Bath",p:70},
+    {n:"Idli (2 pcs)",p:45},{n:"Poori 2 pcs With Vada Curry Full",p:105},
+    {n:"Button Idli Sambar Dip",p:85},{n:"Ghee Podi Idli (2 pcs)",p:80},
+    {n:"Vada Plate",p:35},{n:"Ven Pongal",p:75},{n:"Poori (3 pcs)",p:90},
+    {n:"Idli (1 pc)",p:25},{n:"Idli Vada 1+1",p:60},{n:"Rice Bath",p:75},
+    {n:"Rava Idli Single",p:50},{n:"Ghee Podi Idli (1 pc)",p:45},
+    {n:"Button Plain Idli",p:85},{n:"Ghee Podi Button Idli",p:105},
+    {n:"Curd Vada",p:40},{n:"Mini Combo",p:155},{n:"Thatte Idli (1 pc)",p:45}
+  ]},
+  {id:"cs-special",icon:"⭐",title:"Chef's Special",items:[
+    {n:"Sweet Pongal",p:65},{n:"Vada Curry — Half",p:25},{n:"Vada Curry — Full",p:45},
+    {n:"Carrot Halwa",p:55},{n:"Ghee Podi Paddu",p:105},{n:"Black Chana",p:40}
+  ]},
+  {id:"breads",icon:"🍞",title:"Breads",items:[
+    {n:"Naan",p:45},{n:"Roti",p:35},{n:"Kulcha",p:45},{n:"Butter Naan",p:55},
+    {n:"Butter Roti",p:45},{n:"Butter Kulcha",p:55},{n:"Garlic Naan",p:60},
+    {n:"Laccha Paratha",p:65},{n:"Roti Basket",p:225},{n:"Masala Naan",p:85},
+    {n:"Masala Kulcha",p:95},{n:"Aloo Parotha",p:75},{n:"Paneer Paratha",p:95}
+  ]},
+  {id:"roti-combo",icon:"🍲",title:"Roti Combo",items:[
+    {n:"Roti Curry",p:95},{n:"Naan Curry",p:105},{n:"Kulcha Curry",p:105},
+    {n:"Chapathi Combo",p:85},{n:"Bhattura Extra",p:50},
+    {n:"Chapati (3 pcs)",p:75},{n:"Chole Batura (1 pc)",p:115}
+  ]},
+  {id:"pulao",icon:"🌾",title:"Pulao",items:[
+    {n:"Veg Pulao",p:125},{n:"Kashmir Pulao",p:175},{n:"Green Peas Pulao",p:145}
+  ]},
+  {id:"tandoor",icon:"🔥",title:"Tandoor & Starters",items:[
+    {n:"Hara Bara Kabab",p:205},{n:"Paneer Tikka",p:205},{n:"Mushroom Kabab",p:195},
+    {n:"Paneer Kabab",p:195},{n:"Mushroom Tikka",p:225}
+  ]},
+  {id:"dosa",icon:"🥞",title:"Dosa",items:[
+    {n:"Butter Plain Dosa",p:105},{n:"Masala Dosa",p:85},{n:"Ghee Masala Roast",p:105},
+    {n:"Ghee Plain Roast Dosa",p:115},{n:"Plain Dosa",p:75},{n:"Open Butter Masala Dosa",p:115},
+    {n:"Set Dosa",p:100},{n:"Kali Dosa",p:95},{n:"Rava Dosa",p:110},{n:"Ghee Rava Roast",p:130},
+    {n:"Onion Uttapa",p:105},{n:"Pudina Masala Dosa",p:105},{n:"Podi Masala Dosa",p:100},
+    {n:"Ghee Podi Masala Dosa",p:130},{n:"Ragi Roti",p:105},{n:"Akki Roti",p:105},
+    {n:"Ghee Masala Dosa",p:115},{n:"Ghee Plain Dosa",p:105},{n:"Paneer Masala Dosa",p:125},
+    {n:"Paneer Plain Dosa",p:115},{n:"Mysore Masala Dosa",p:155},{n:"Cheese Masala Dosa",p:125},
+    {n:"Podi Dosa",p:95},{n:"Plain Dosa Salna",p:95},{n:"Schezwan Dosa",p:105},
+    {n:"Palak Dosa",p:105},{n:"Rava Onion Dosa",p:120},{n:"Ragi Dosa (2 pcs)",p:105},
+    {n:"Pudina Dosa",p:90},{n:"Onion Masala Dosa",p:105},{n:"Akki Roti (single)",p:55},
+    {n:"Neer Dosa",p:85},{n:"Paper Plain Dosa",p:95},{n:"Ghee Onion Rava Dosa",p:140},
+    {n:"Kali Dosa With Vada Curry (Full)",p:135},{n:"Paper Masala Dosa",p:115},
+    {n:"Rava Masala Dosa",p:115},{n:"Ghee Podi Dosa",p:130},{n:"Cheese Dosa Plain",p:105},
+    {n:"Kali Dosa (single)",p:50},{n:"Onion Dosa",p:85},{n:"Pesarattu Dosa Plain",p:95},
+    {n:"Ghee Pesarattu",p:115},{n:"Onion Pesarattu",p:125},{n:"Uppuma Pesarattu",p:145},
+    {n:"Onion Podi Dosa",p:125},{n:"Set Dosa (2) With Vada Curry (Full)",p:110},
+    {n:"Ghee Menthe Dosa",p:105},{n:"Onion Menthe Dosa",p:115},{n:"Methi Dosa (plain)",p:85},
+    {n:"Plain Podi Dosa",p:105},{n:"Onion Rava Masala Dosa",p:125},
+    {n:"Ghee Podi Thatte Idli (1 pc)",p:70},{n:"Button Idli Plain",p:85},
+    {n:"Ghee Paper Roast",p:125},{n:"Tomato Dosa",p:95},{n:"Butter Masala Dosa",p:105}
+  ]},
+  {id:"soup",icon:"🍵",title:"Soup",items:[
+    {n:"Tomato Soup",p:65},{n:"Veg Manchow Soup",p:85},{n:"Sweet Corn Soup",p:85},
+    {n:"Mushroom Soup",p:85},{n:"Hot & Sour Soup",p:85},
+    {n:"Lemon & Coriander Soup",p:95},{n:"Noodles Soup",p:85}
+  ]},
+  {id:"lunch-meals",icon:"🍽️",title:"Lunch Meals",items:[
+    {n:"Mini South Meals",p:85},{n:"South Meals (Poori)",p:135},
+    {n:"South Meals (Chappati)",p:135},{n:"South Meal (Ragi Mudde)",p:140},
+    {n:"South Meal (Roti)",p:135},{n:"Mini Ragi Mudde Meals",p:85},
+    {n:"Ragi Extra Ball (1 pc)",p:25},{n:"Ragi Ball Meal",p:50},
+    {n:"North Meals",p:175},{n:"Curd Rice",p:70},{n:"Curd Extra",p:20},{n:"Extra Rice",p:45}
+  ]},
+  {id:"chinese-starters",icon:"🥡",title:"Chinese Starters",items:[
+    {n:"Gobi Manchurian",p:150},{n:"Babycorn Manchurian",p:155},{n:"Mushroom Manchurian",p:165},
+    {n:"Paneer Manchurian",p:165},{n:"Gobi Chilli",p:150},{n:"Babycorn Chilli",p:155},
+    {n:"Mushroom Chilli",p:165},{n:"Paneer Chilli",p:165},{n:"Gobi 65",p:150},
+    {n:"Paneer 65",p:165},{n:"Baby Corn 65",p:155},{n:"Mushroom 65",p:165},
+    {n:"Mushroom Pepper Dry",p:155},{n:"Gobi Pepper Fry",p:175},
+    {n:"Paneer Pepper Dry",p:165},{n:"Baby Corn Pepper Dry",p:175}
+  ]},
+  {id:"chinese-rice",icon:"🍚",title:"Chinese Rice",items:[
+    {n:"Garlic Fried Rice",p:155},{n:"Schezwan Fried Rice",p:130},
+    {n:"Vegetable Fried Rice",p:105},{n:"Paneer Fried Rice",p:155},
+    {n:"Mushroom Fried Rice",p:155},{n:"Baby Corn Fried Rice",p:145},
+    {n:"Garlic Schezwan Fried Rice",p:155},{n:"Singapore Fried Rice",p:185},
+    {n:"555 Fried Rice",p:205}
+  ]},
+  {id:"chinese-noodles",icon:"🍜",title:"Chinese Noodles",items:[
+    {n:"Baby Corn Noodles",p:130},{n:"Garlic Noodles",p:145},{n:"Sezwan Noodles",p:145},
+    {n:"Gobi Noodle",p:135},{n:"Veg Noodles",p:105},{n:"Paneer Noodles",p:145},
+    {n:"Mushroom Noodles",p:145},{n:"Hakka Noodles",p:140}
+  ]},
+  {id:"chinese-combo",icon:"🥢",title:"Chinese Combo",items:[
+    {n:"Half Paneer Fried Rice + Half Gobi Manchurian",p:175},
+    {n:"Half Veg Fried Rice + Half Paneer Manchurian",p:175}
+  ]},
+  {id:"north-curries",icon:"🫕",title:"North Curries",items:[
+    {n:"Baby Corn Tikka",p:185},{n:"Paneer Butter Masala",p:195},{n:"Kaju Masala",p:205},
+    {n:"Mushroom Masala",p:195},{n:"Veg Hyderabadi Masala",p:195},{n:"Veg Kolapuri",p:180},
+    {n:"Mix Veg Curry",p:165},{n:"Paneer Kadai",p:195},{n:"Kadai Mushroom",p:195},
+    {n:"Dal Tadka",p:145},{n:"Dal Fry",p:125},{n:"Aloo Jeera Dry",p:145},
+    {n:"Paneer Bhurji",p:195},{n:"Paneer Matar",p:195},{n:"Aloo Gobi Masala",p:155},
+    {n:"Green Peas Masala",p:165},{n:"Palak Paneer",p:185},{n:"Paneer Tikka Masala",p:205},
+    {n:"Paneer Kolapuri",p:195},{n:"Veg Kofta Curry",p:195},{n:"Veg Malai Kofta",p:195},
+    {n:"Subramanya Special Curry",p:230},{n:"Kadai Vegetable",p:175}
+  ]}
+];
+
+// ─── State ───
+var view='card',pf='all';
+
+function priceClass(p){return p<50?'price-cheap':p<=100?'price-mid':'price-prem'}
+function passesFilter(p){
+  if(pf==='all') return true;
+  if(pf==='cheap') return p<50;
+  if(pf==='mid') return p>=50&&p<=100;
+  if(pf==='prem') return p>100;
+  return true;
+}
+function hl(text,q){
+  if(!q) return text;
+  return text.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'),'<mark>$1</mark>');
+}
+
+function setView(v){
+  view=v;
+  document.getElementById('btnCard').classList.toggle('active',v==='card');
+  document.getElementById('btnList').classList.toggle('active',v==='list');
+  render();
+}
+function setPF(el,val){
+  pf=val;
+  document.querySelectorAll('.pf-btn').forEach(function(b){b.classList.remove('active')});
+  el.classList.add('active');
+  render();
+}
+
+// ─── Build Nav + Sidebar ───
+var navEl=document.getElementById('navScroll');
+var sbEl=document.getElementById('sidebarLinks');
+MENU.forEach(function(cat){
+  var btn=document.createElement('button');
+  btn.className='nav-btn';btn.dataset.id=cat.id;
+  btn.innerHTML=cat.icon+' '+cat.title+'<span class="cnt">'+cat.items.length+'</span>';
+  btn.onclick=function(){
+    var s=document.getElementById('section-'+cat.id);
+    if(s) s.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  navEl.appendChild(btn);
+
+  var a=document.createElement('a');
+  a.className='sb-link';a.href='#section-'+cat.id;
+  a.innerHTML='<span class="sb-link-left">'+cat.icon+' '+cat.title+'</span><span class="sb-link-right">'+cat.items.length+'</span>';
+  a.onclick=function(e){
+    e.preventDefault();
+    var s=document.getElementById('section-'+cat.id);
+    if(s) s.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+  sbEl.appendChild(a);
+});
+
+// totals
+var tot=MENU.reduce(function(s,c){return s+c.items.length},0);
+document.getElementById('totalCount').textContent=tot;
+document.getElementById('catCount').textContent=MENU.length;
+
+// ─── IntersectionObserver ───
+var obs=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      var id=e.target.id.replace('section-','');
+      document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.toggle('active',b.dataset.id===id)});
+      document.querySelectorAll('.sb-link').forEach(function(a){a.classList.toggle('active',a.href.endsWith('#section-'+id))});
+      var ab=document.querySelector('.nav-btn[data-id="'+id+'"]');
+      if(ab) ab.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    }
+  });
+},{rootMargin:'-52px 0px -68% 0px',threshold:0});
+
+// ─── Render ───
+function render(){
+  var q=document.getElementById('searchInput').value.trim();
+  var sort=document.getElementById('sortSelect').value;
+  var noRes=document.getElementById('noResults');
+  var content=document.getElementById('menuContent');
+  content.querySelectorAll('.menu-section').forEach(function(el){el.remove()});
+  obs.disconnect();
+  var grand=0;
+
+  MENU.forEach(function(cat){
+    var items=cat.items.filter(function(i){
+      return (!q||i.n.toLowerCase().indexOf(q.toLowerCase())!==-1)&&passesFilter(i.p);
+    });
+    if(!items.length) return;
+    if(sort==='asc') items=items.slice().sort(function(a,b){return a.p-b.p});
+    else if(sort==='desc') items=items.slice().sort(function(a,b){return b.p-a.p});
+    else if(sort==='alpha') items=items.slice().sort(function(a,b){return a.n.localeCompare(b.n)});
+    grand+=items.length;
+
+    var sec=document.createElement('section');
+    sec.className='menu-section';sec.id='section-'+cat.id;
+
+    var bodyHTML;
+    if(view==='list'){
+      bodyHTML='<div class="items-list">'+items.map(function(item,i){
+        return '<div class="item-row">'+
+          '<span class="item-row-idx">'+(i+1)+'</span>'+
+          '<span class="item-name" style="flex:1">'+hl(item.n,q)+'</span>'+
+          '<span class="item-price '+priceClass(item.p)+'">₹'+item.p+'</span>'+
+          '</div>';
+      }).join('')+'</div>';
+    } else {
+      bodyHTML='<div class="items-grid">'+items.map(function(item){
+        return '<div class="item-card">'+
+          '<span class="item-name">'+hl(item.n,q)+'</span>'+
+          '<span class="item-price '+priceClass(item.p)+'">₹'+item.p+'</span>'+
+          '</div>';
+      }).join('')+'</div>';
+    }
+
+    sec.innerHTML=
+      '<div class="section-header">'+
+        '<span class="section-icon">'+cat.icon+'</span>'+
+        '<h2 class="section-title">'+cat.title+'</h2>'+
+        '<span class="section-count">'+items.length+' items</span>'+
+      '</div>'+
+      '<div class="section-divider"></div>'+
+      bodyHTML;
+
+    content.appendChild(sec);
+    obs.observe(sec);
+  });
+
+  noRes.classList.toggle('show',grand===0);
+}
+
+document.getElementById('searchInput').addEventListener('input',render);
+render();
+
+window.addEventListener('scroll',function(){
+  document.getElementById('scrollTop').classList.toggle('show',scrollY>500);
+});
+</script>
+</body>
+</html>
