@@ -34,11 +34,14 @@
     .top-bar{
       background:var(--surface);
       border-bottom:1px solid var(--border);
-      padding:10px 16px;
       position:sticky;top:0;z-index:100;
-      display:flex;align-items:center;gap:16px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
+    .top-bar-main {
+      padding:10px 16px;
+      display:flex;align-items:center;gap:16px;
+    }
+    
     .brand-compact{
       font-weight:700;font-size:16px;color:var(--text);
       white-space:nowrap;display:flex;align-items:center;gap:6px;
@@ -63,6 +66,21 @@
       color:var(--text-d);pointer-events:none;
     }
 
+    /* ─── QUICK FILTERS (SCROLLABLE ON MOBILE) ─── */
+    .filter-scroll {
+      display: flex; gap: 8px; padding: 0 16px 10px 16px;
+      overflow-x: auto; scrollbar-width: none;
+    }
+    .filter-scroll::-webkit-scrollbar { display: none; }
+    .filter-chip {
+      background: var(--bg); border: 1px solid var(--border);
+      color: var(--text-m); font-size: 13px; font-weight: 500;
+      padding: 6px 12px; border-radius: 16px; cursor: pointer;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .filter-chip:hover { background: #e5e7eb; }
+    .filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
     /* ─── LAYOUT ─── */
     .layout{
       display:flex;flex:1;
@@ -73,7 +91,7 @@
     .sidebar{
       width:220px;flex-shrink:0;
       background:var(--surface);border-right:1px solid var(--border);
-      height:calc(100vh - 61px);position:sticky;top:61px;
+      height:calc(100vh - 96px);position:sticky;top:96px;
       overflow-y:auto;padding:12px;
       display:none; 
     }
@@ -98,7 +116,7 @@
       display:flex;gap:6px;padding:10px 12px;background:var(--surface);
       border-bottom:1px solid var(--border);overflow-x:auto;
       scrollbar-width:none;
-      position: sticky; top: 61px; z-index: 99;
+      position: sticky; top: 96px; z-index: 99;
     }
     @media(min-width:768px){.nav-scroll-mobile{display:none}}
     .nav-scroll-mobile::-webkit-scrollbar{display:none}
@@ -107,14 +125,14 @@
       border:1px solid var(--border);background:var(--bg);
       font-size:13px;font-weight:500;color:var(--text-m);cursor:pointer;
     }
-    .mob-cat-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .mob-cat-btn.active{background:rgba(245, 158, 11, 0.1); color:var(--primary-hover); border-color:rgba(245, 158, 11, 0.3);}
 
     /* ─── MAIN CONTENT ─── */
     .content{
       flex:1;padding:20px 24px 140px;min-width:0;
     }
 
-    .menu-section{margin-bottom:32px; scroll-margin-top: 110px;}
+    .menu-section{margin-bottom:32px; scroll-margin-top: 150px;}
     .section-header{
       font-size:18px;font-weight:700;color:var(--text);
       margin-bottom:12px;display:flex;align-items:center;gap:8px;
@@ -131,13 +149,13 @@
       border-radius:var(--radius);padding:12px;
       display:flex;flex-direction:column;justify-content:space-between;
       gap:8px; cursor: pointer;
-      transition:transform .1s, box-shadow .1s, border-color .1s;
+      transition:transform .1s, box-shadow .1s, border-color .1s, opacity 0.2s;
       user-select: none; position: relative;
     }
     .item-card:active{transform: scale(0.97); background: #fdfbf7;}
     .item-card:hover{border-color: #d1d5db; box-shadow:0 2px 8px rgba(0,0,0,0.04);}
     
-    /* Highlight items that fit within remaining budget perfectly */
+    /* Highlight perfect matches */
     .item-card.perfect-fit { border-color: var(--success); background: #f0fdf4; }
     
     .item-name{font-size:13px;font-weight:600;color:var(--text); line-height:1.3;}
@@ -167,19 +185,15 @@
     .cart-bar.active { transform: translateY(0); }
     
     .cart-info { display: flex; flex-direction: column; gap: 2px;}
-    
     .budget-status { font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; }
     .budget-total { font-size: 18px; font-weight: 700; color: var(--text); }
     
-    /* Dynamic color classes */
     .status-under { color: var(--success); }
     .status-over { color: var(--danger); }
-    
     .cart-items { font-size: 12px; color: var(--text-m); font-weight: 500;}
 
     .cart-actions { display: flex; gap: 12px; align-items: center; }
     
-    /* People Stepper */
     .people-control { 
       display: flex; align-items: center; background: var(--bg);
       border-radius: 20px; border: 1px solid var(--border); overflow: hidden;
@@ -248,26 +262,35 @@
 
     @media(max-width:767px){
       .content{padding:16px 12px 160px}
-      .top-bar{flex-wrap:wrap;padding:10px 12px;gap:10px}
+      .top-bar-main{flex-wrap:wrap;padding:10px 12px;gap:10px}
       .search-wrap{order:3;width:100%;max-width:none}
       .items-grid{grid-template-columns:repeat(2,1fr); gap:8px}
-      .cart-bar { 
-        padding: 12px 16px; flex-direction: column; align-items: stretch; gap: 12px;
-      }
+      .cart-bar { padding: 12px 16px; flex-direction: column; align-items: stretch; gap: 12px; }
       .cart-actions { justify-content: space-between; width: 100%; }
       .budget-status { justify-content: space-between; }
+      .sidebar{height:calc(100vh - 105px);top:105px;}
+      .nav-scroll-mobile{top:105px;}
+      .menu-section{scroll-margin-top: 160px;}
     }
   </style>
 </head>
 <body>
 
 <div class="top-bar">
-  <div class="brand-compact">
-    <span>✦</span> Team Menu
+  <div class="top-bar-main">
+    <div class="brand-compact"><span>✦</span> Team Menu</div>
+    <div class="search-wrap">
+      <input type="text" id="searchInput" placeholder="Search menu..." autocomplete="off"/>
+      <span class="si">🔍</span>
+    </div>
   </div>
-  <div class="search-wrap">
-    <input type="text" id="searchInput" placeholder="Search menu..." autocomplete="off"/>
-    <span class="si">🔍</span>
+  
+  <!-- QUICK FILTERS -->
+  <div class="filter-scroll" id="filterContainer">
+    <button class="filter-chip active" data-filter="all">All Items</button>
+    <button class="filter-chip" data-filter="50">Under ₹50 (Fillers)</button>
+    <button class="filter-chip" data-filter="120">Under ₹120 (Meals)</button>
+    <button class="filter-chip" data-filter="afford">Within Budget</button>
   </div>
 </div>
 
@@ -278,7 +301,7 @@
   <main class="content" id="menuContent">
     <div class="no-results" id="noResults">
       <div style="font-size:32px;margin-bottom:8px">🔍</div>
-      <p>No items found.</p>
+      <p>No items found matching criteria.</p>
     </div>
   </main>
 </div>
@@ -294,7 +317,6 @@
   </div>
   
   <div class="cart-actions">
-    <!-- People Stepper -->
     <div style="display: flex; align-items: center;">
       <span class="people-label">Coupons:</span>
       <div class="people-control">
@@ -315,13 +337,9 @@
       <span>Your Order</span>
       <button class="close-btn" onclick="closeCartModal()">&times;</button>
     </div>
-    <div class="modal-body" id="cartModalBody">
-      <!-- Cart items injected here -->
-    </div>
+    <div class="modal-body" id="cartModalBody"></div>
     <div class="modal-footer">
-      <div id="modalSummary" style="margin-bottom: 16px;">
-        <!-- Summary injected here -->
-      </div>
+      <div id="modalSummary" style="margin-bottom: 16px;"></div>
       <button class="btn btn-primary" style="width: 100%; display:flex; justify-content: center; gap: 8px;" onclick="copyOrder()">
         📋 Copy to Slack/Teams
       </button>
@@ -459,6 +477,17 @@ const MENU=[
 let cart = {}; 
 const DAILY_ALLOWANCE = 120;
 let peopleCount = 1;
+let currentFilter = 'all';
+
+// --- FILTER LOGIC ---
+document.querySelectorAll('.filter-chip').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+    e.target.classList.add('active');
+    currentFilter = e.target.dataset.filter;
+    render();
+  });
+});
 
 // --- CART & BUDGET LOGIC ---
 function updatePeople(delta) {
@@ -466,21 +495,17 @@ function updatePeople(delta) {
   if (peopleCount < 1) peopleCount = 1;
   document.getElementById('peopleCountDisplay').innerText = peopleCount;
   updateCartUI();
-  
-  if(document.getElementById('cartModal').classList.contains('active')){
-    renderCartModal();
-  }
+  if(currentFilter === 'afford') render(); // re-render if filter depends on budget
+  if(document.getElementById('cartModal').classList.contains('active')) renderCartModal();
 }
 
 function addToCart(name, price) {
-  if (cart[name]) {
-    cart[name].qty += 1;
-  } else {
-    cart[name] = { price: price, qty: 1 };
-  }
-  updateCartUI();
+  if (cart[name]) cart[name].qty += 1;
+  else cart[name] = { price: price, qty: 1 };
   
-  // Visual feedback
+  updateCartUI();
+  if(currentFilter === 'afford') render(); 
+  
   const card = event.currentTarget;
   card.style.transform = "scale(0.95)";
   setTimeout(() => card.style.transform = "", 100);
@@ -492,12 +517,14 @@ function updateQty(name, delta) {
     if (cart[name].qty <= 0) delete cart[name];
   }
   updateCartUI();
+  if(currentFilter === 'afford') render(); 
   renderCartModal();
 }
 
 function clearCart() {
   cart = {};
   updateCartUI();
+  if(currentFilter === 'afford') render(); 
   closeCartModal();
 }
 
@@ -531,37 +558,27 @@ function updateCartUI() {
     diffText.className = 'status-under';
   }
   
-  if (stats.qty > 0) {
-    bar.classList.add('active');
-  } else {
-    bar.classList.remove('active');
-  }
+  if (stats.qty > 0) bar.classList.add('active');
+  else bar.classList.remove('active');
   
-  highlightPerfectFits(stats.remaining);
+  highlightAffordability(stats.remaining);
 }
 
-function highlightPerfectFits(remainingBudget) {
+function highlightAffordability(remainingBudget) {
   document.querySelectorAll('.item-card').forEach(card => {
     const price = parseInt(card.dataset.price);
-    // If item exactly matches remaining budget, highlight it
+    card.classList.remove('perfect-fit');
+    
+    // Highlight exact matches
     if (remainingBudget > 0 && price === remainingBudget) {
       card.classList.add('perfect-fit');
-    } else {
-      card.classList.remove('perfect-fit');
     }
   });
 }
 
 // --- MODAL & SHARING LOGIC ---
-function openCartModal() {
-  renderCartModal();
-  document.getElementById('cartModal').classList.add('active');
-}
-
-function closeCartModal() {
-  document.getElementById('cartModal').classList.remove('active');
-  document.getElementById('copyToast').style.opacity = '0';
-}
+function openCartModal() { renderCartModal(); document.getElementById('cartModal').classList.add('active'); }
+function closeCartModal() { document.getElementById('cartModal').classList.remove('active'); document.getElementById('copyToast').style.opacity = '0'; }
 
 function renderCartModal() {
   const body = document.getElementById('cartModalBody');
@@ -589,7 +606,6 @@ function renderCartModal() {
   }
   body.innerHTML = html;
   
-  // Render Summary
   summaryBox.innerHTML = `
     <div class="summary-row">
       <span>Company Coupons (${peopleCount} × ₹${DAILY_ALLOWANCE})</span>
@@ -612,16 +628,10 @@ function copyOrder() {
   const stats = getCartStats();
   
   let text = "🍽️ *Team Lunch Order:*\n\n";
-  for (const name in cart) {
-    text += `- ${cart[name].qty}x ${name}\n`;
-  }
-  
+  for (const name in cart) { text += `- ${cart[name].qty}x ${name}\n`; }
   text += `\n*Total Order: ₹${stats.price}*`;
   text += `\nCoupons Applied: ${peopleCount} (₹${stats.allowance})`;
-  
-  if (stats.extra > 0) {
-    text += `\n🚨 *Extra to Pay: ₹${stats.extra}*`;
-  }
+  if (stats.extra > 0) text += `\n🚨 *Extra to Pay: ₹${stats.extra}*`;
   
   navigator.clipboard.writeText(text).then(() => {
     const toast = document.getElementById('copyToast');
@@ -672,9 +682,19 @@ function render() {
   content.querySelectorAll('.menu-section').forEach(el => el.remove());
   observer.disconnect();
   let totalFound = 0;
+  
+  const stats = getCartStats();
 
   MENU.forEach(cat => {
-    const items = cat.items.filter(i => !q || i.n.toLowerCase().includes(q));
+    let items = cat.items.filter(i => !q || i.n.toLowerCase().includes(q));
+    
+    // Apply Quick Filters
+    if (currentFilter === '50') items = items.filter(i => i.p <= 50);
+    else if (currentFilter === '120') items = items.filter(i => i.p <= 120);
+    else if (currentFilter === 'afford') {
+      items = items.filter(i => i.p <= stats.remaining);
+    }
+    
     if(!items.length) return;
     totalFound += items.length;
 
@@ -697,8 +717,6 @@ function render() {
   });
 
   noRes.classList.toggle('show', totalFound === 0);
-  
-  // Re-run highlighting if we re-render while cart exists
   if (Object.keys(cart).length > 0) updateCartUI(); 
 }
 
