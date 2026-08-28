@@ -102,18 +102,6 @@
     .sw .clear-btn.on{display:flex}
     .sw .clear-btn:hover{background:var(--b2);color:var(--t1);transform:translateY(-50%) scale(1.15)}
 
-    .trending-searches{
-      display:flex;gap:6px;flex-wrap:wrap;align-items:center;
-      margin-top:10px;padding-left:4px;
-    }
-    .ts-lbl{font-size:11px;color:var(--gold-b);font-weight:700;letter-spacing:-.02em}
-    .ts-chip{
-      background:rgba(255,255,255,0.5);border:1px solid var(--gold-d);
-      color:var(--t2);font-family:'Inter',sans-serif;font-size:11px;font-weight:600;
-      padding:4px 10px;border-radius:12px;cursor:pointer;transition:all .2s;
-    }
-    .ts-chip:hover{background:var(--gold-d);color:var(--gold-b);border-color:var(--gold-g)}
-
     .search-wrap{position:relative}
     .search-dropdown{
       position:absolute;top:100%;left:0;right:0;margin-top:6px;
@@ -131,6 +119,12 @@
     .search-dropdown li:hover{background:var(--s2)}
     .search-dropdown li .match{font-weight:700;color:var(--gold-b)}
     .search-dropdown li .veg{margin-right:8px}
+    .search-dropdown li.drop-lbl{
+      padding:8px 16px;font-size:11px;color:var(--gold-b);font-weight:700;
+      text-transform:uppercase;letter-spacing:0.5px;background:var(--s2);
+      cursor:default;
+    }
+    .search-dropdown li.drop-lbl:hover{background:var(--s2)}
 
     /* Filter chips */
     .filter-bar{
@@ -519,7 +513,6 @@
         <button class="clear-btn" id="searchClear" title="Clear">×</button>
         <ul class="search-dropdown" id="searchDropdown"></ul>
       </div>
-      <div class="trending-searches" id="trendingSearches" style="display:none"></div>
     </div>
   </div>
   <div class="filter-bar" id="filterBar">
@@ -790,20 +783,12 @@ async function fetchTrending() {
   } catch(e){ console.error(e); }
 }
 
+let topSearchTerms = [];
 async function fetchTrendingSearches() {
   if(!db) return;
   try {
     const snap = await db.collection('popular_searches').orderBy('count', 'desc').limit(4).get();
-    const topSearches = [];
-    snap.forEach(d => topSearches.push(d.id));
-    
-    if(topSearches.length > 0) {
-      const bar = document.getElementById('trendingSearches');
-      bar.innerHTML = '<span class="ts-lbl">🔥 Trending Searches:</span> ' + topSearches.map(s => 
-        `<button class="ts-chip" onclick="applySearch('${s}')">${s}</button>`
-      ).join('');
-      bar.style.display = 'flex';
-    }
+    snap.forEach(d => topSearchTerms.push(d.id));
   } catch(e){ console.error(e); }
 }
 
@@ -826,10 +811,7 @@ document.querySelectorAll('.chip').forEach(c=>{
 });
 
 // ── SEARCH ──
-document.getElementById('searchInput').addEventListener('input',(e)=>{
-  const v=e.target.value.toLowerCase().trim();
-  document.getElementById('searchClear').classList.toggle('on',v.length>0);
-  
+function handleDropdown(v) {
   const drop = document.getElementById('searchDropdown');
   if (v.length > 0) {
     let matches = [];
@@ -855,15 +837,32 @@ document.getElementById('searchInput').addEventListener('input',(e)=>{
         return `<li onclick="applySuggest('${m.n.replace(/'/g, "\\'")}')"><span class="veg"></span>${hlName}</li>`;
       }).join('');
       drop.classList.add('on');
+      trackSearch(v);
     } else {
       drop.classList.remove('on');
     }
   } else {
-    drop.classList.remove('on');
+    if (topSearchTerms.length > 0) {
+      drop.innerHTML = `<li class="drop-lbl">🔥 Trending Searches</li>` + 
+        topSearchTerms.map(s => `<li onclick="applySuggest('${s.replace(/'/g, "\\'")}')">${s}</li>`).join('');
+      drop.classList.add('on');
+    } else {
+      drop.classList.remove('on');
+    }
   }
+}
 
+const sInput = document.getElementById('searchInput');
+sInput.addEventListener('input',(e)=>{
+  const v = e.target.value.toLowerCase().trim();
+  document.getElementById('searchClear').classList.toggle('on', v.length>0);
+  handleDropdown(v);
   trackSearch(v);
   render();
+});
+
+sInput.addEventListener('focus',(e)=>{
+  handleDropdown(e.target.value.toLowerCase().trim());
 });
 
 document.addEventListener('click', (e) => {
