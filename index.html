@@ -133,6 +133,19 @@
     }
 
     .menu-section{margin-bottom:32px; scroll-margin-top: 150px;}
+
+    /* ─── COURSE GROUP DIVIDER ─── */
+    .course-group-header {
+      display: flex; align-items: center; gap: 10px;
+      margin: 28px 0 16px;
+      color: var(--text-d); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .course-group-header:first-child { margin-top: 0; }
+    .course-group-header::before, .course-group-header::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .course-group-header::before { flex: 0 0 0; }
     .section-header{
       font-size:18px;font-weight:700;color:var(--text);
       margin-bottom:12px;display:flex;align-items:center;gap:8px;
@@ -350,28 +363,47 @@
 
 <script>
 const MENU=[
-  {id:"coffee-tea",icon:"☕",title:"Coffee & Tea",items:[
-    {n:"Coffee",p:20},{n:"Tea",p:20},{n:"Black Tea",p:20},{n:"Ginger Tea",p:25},
-    {n:"Hot Badam Milk",p:35},{n:"Bournvita",p:35},{n:"Horlicks",p:35},{n:"Boost",p:35},
-    {n:"Tea (Jaggery)",p:25},{n:"Milk (one Cup)",p:20},{n:"Coffee (Jaggery)",p:25},
-    {n:"Black Coffee (Jaggery)",p:25},{n:"Black Coffee",p:20},{n:"Masala Tea",p:25},
-    {n:"Lemon Tea",p:25},{n:"Ginger Coffee",p:25},{n:"Green Tea",p:25},{n:"Kashaya",p:25}
+  // ── LUNCH MEALS ──
+  {id:"lunch-meals",icon:"🍽️",title:"Lunch Meals",group:"Lunch Meals",items:[
+    {n:"Mini South Meals",p:85},{n:"South Meals (Poori)",p:135},
+    {n:"South Meals (Chappati)",p:135},{n:"South Meal (Ragi Mudde)",p:140},
+    {n:"South Meal (Roti)",p:135},{n:"Mini Ragi Mudde Meals",p:85},
+    {n:"Ragi Extra Ball (1 pc)",p:25},{n:"Ragi Ball Meal",p:50},
+    {n:"North Meals",p:175},{n:"Curd Rice",p:70},{n:"Curd Extra",p:20},{n:"Extra Rice",p:45}
   ]},
-  {id:"snacks",icon:"🥟",title:"Snacks",items:[
-    {n:"Maddur Vada",p:35},{n:"Rava Vada (3 pcs)",p:35},{n:"French Fries",p:115},
-    {n:"Undee Pakoda (3 pcs)",p:45},{n:"Mangalore Bajji (3 pcs)",p:45},{n:"Mangalore Buns",p:45},
-    {n:"Bonda Soup (2 pcs)",p:60},{n:"Mixed Bajji (5 pcs)",p:65},{n:"Onion Bonda (3 pcs)",p:45},
-    {n:"Bonda (3 pcs)",p:45},{n:"Palak / Onion / Ragi Pakoda",p:65},
-    {n:"Paddu-kuzhi Paniyaram Jamun (2 pcs)",p:45}
+  // ── MAINS ──
+  {id:"roti-combo",icon:"🍲",title:"Roti Combo",group:"Mains",items:[
+    {n:"Roti Curry",p:95},{n:"Naan Curry",p:105},{n:"Kulcha Curry",p:105},
+    {n:"Chapathi Combo",p:85},{n:"Bhattura Extra",p:50},
+    {n:"Chapati (3 pcs)",p:75},{n:"Chole Batura (1 pc)",p:115}
   ]},
-  {id:"parotta",icon:"🫓",title:"Parotta with Gravy",items:[
+  {id:"pulao",icon:"🌾",title:"Pulao",group:"Mains",items:[
+    {n:"Veg Pulao",p:125},{n:"Kashmir Pulao",p:175},{n:"Green Peas Pulao",p:145}
+  ]},
+  {id:"north-curries",icon:"🫕",title:"North Curries",group:"Mains",items:[
+    {n:"Baby Corn Tikka",p:185},{n:"Paneer Butter Masala",p:195},{n:"Kaju Masala",p:205},
+    {n:"Mushroom Masala",p:195},{n:"Veg Hyderabadi Masala",p:195},{n:"Veg Kolapuri",p:180},
+    {n:"Mix Veg Curry",p:165},{n:"Paneer Kadai",p:195},{n:"Kadai Mushroom",p:195},
+    {n:"Dal Tadka",p:145},{n:"Dal Fry",p:125},{n:"Aloo Jeera Dry",p:145},
+    {n:"Paneer Bhurji",p:195},{n:"Paneer Matar",p:195},{n:"Aloo Gobi Masala",p:155},
+    {n:"Green Peas Masala",p:165},{n:"Palak Paneer",p:185},{n:"Paneer Tikka Masala",p:205},
+    {n:"Paneer Kolapuri",p:195},{n:"Veg Kofta Curry",p:195},{n:"Veg Malai Kofta",p:195},
+    {n:"Subramanya Special Curry",p:230},{n:"Kadai Vegetable",p:175}
+  ]},
+  {id:"breads",icon:"🍞",title:"Breads",group:"Mains",items:[
+    {n:"Naan",p:45},{n:"Roti",p:35},{n:"Kulcha",p:45},{n:"Butter Naan",p:55},
+    {n:"Butter Roti",p:45},{n:"Butter Kulcha",p:55},{n:"Garlic Naan",p:60},
+    {n:"Laccha Paratha",p:65},{n:"Roti Basket",p:225},{n:"Masala Naan",p:85},
+    {n:"Masala Kulcha",p:95},{n:"Aloo Parotha",p:75},{n:"Paneer Paratha",p:95}
+  ]},
+  {id:"parotta",icon:"🫓",title:"Parotta with Gravy",group:"Mains",items:[
     {n:"Wheat Layered Parotta (2 pcs)",p:95},{n:"TN Parotta (2 pcs)",p:95},
     {n:"Paneer Kothu Parotta",p:185},{n:"Kothu Parota",p:135},
     {n:"Nool Parotta",p:115},{n:"Bun Parota",p:105},
     {n:"Butter Bun Parota",p:125},{n:"Ceylon Parotta",p:110},
     {n:"Masala Parota",p:135},{n:"Banana Leaf Parotta",p:155}
   ]},
-  {id:"tiffin",icon:"🍛",title:"Tiffin & Breakfast",items:[
+  {id:"tiffin",icon:"🍛",title:"Tiffin & Breakfast",group:"Mains",items:[
     {n:"Kesari Bath",p:40},{n:"Khara Bath",p:35},{n:"Chow Chow Bath",p:70},
     {n:"Idli (2 pcs)",p:45},{n:"Poori 2 pcs With Vada Curry Full",p:105},
     {n:"Button Idli Sambar Dip",p:85},{n:"Ghee Podi Idli (2 pcs)",p:80},
@@ -381,29 +413,55 @@ const MENU=[
     {n:"Button Plain Idli",p:85},{n:"Ghee Podi Button Idli",p:105},
     {n:"Curd Vada",p:40},{n:"Mini Combo",p:155},{n:"Thatte Idli (1 pc)",p:45}
   ]},
-  {id:"cs-special",icon:"⭐",title:"Chef's Special",items:[
+  // ── CHEF'S SPECIAL ──
+  {id:"cs-special",icon:"⭐",title:"Chef's Special",group:"Chef's Special",items:[
     {n:"Sweet Pongal",p:65},{n:"Vada Curry — Half",p:25},{n:"Vada Curry — Full",p:45},
     {n:"Carrot Halwa",p:55},{n:"Ghee Podi Paddu",p:105},{n:"Black Chana",p:40}
   ]},
-  {id:"breads",icon:"🍞",title:"Breads",items:[
-    {n:"Naan",p:45},{n:"Roti",p:35},{n:"Kulcha",p:45},{n:"Butter Naan",p:55},
-    {n:"Butter Roti",p:45},{n:"Butter Kulcha",p:55},{n:"Garlic Naan",p:60},
-    {n:"Laccha Paratha",p:65},{n:"Roti Basket",p:225},{n:"Masala Naan",p:85},
-    {n:"Masala Kulcha",p:95},{n:"Aloo Parotha",p:75},{n:"Paneer Paratha",p:95}
+  // ── CHINESE ──
+  {id:"chinese-rice",icon:"🍚",title:"Chinese Rice",group:"Chinese",items:[
+    {n:"Garlic Fried Rice",p:155},{n:"Schezwan Fried Rice",p:130},
+    {n:"Vegetable Fried Rice",p:105},{n:"Paneer Fried Rice",p:155},
+    {n:"Mushroom Fried Rice",p:155},{n:"Baby Corn Fried Rice",p:145},
+    {n:"Garlic Schezwan Fried Rice",p:155},{n:"Singapore Fried Rice",p:185},
+    {n:"555 Fried Rice",p:205}
   ]},
-  {id:"roti-combo",icon:"🍲",title:"Roti Combo",items:[
-    {n:"Roti Curry",p:95},{n:"Naan Curry",p:105},{n:"Kulcha Curry",p:105},
-    {n:"Chapathi Combo",p:85},{n:"Bhattura Extra",p:50},
-    {n:"Chapati (3 pcs)",p:75},{n:"Chole Batura (1 pc)",p:115}
+  {id:"chinese-noodles",icon:"🍜",title:"Chinese Noodles",group:"Chinese",items:[
+    {n:"Baby Corn Noodles",p:130},{n:"Garlic Noodles",p:145},{n:"Sezwan Noodles",p:145},
+    {n:"Gobi Noodle",p:135},{n:"Veg Noodles",p:105},{n:"Paneer Noodles",p:145},
+    {n:"Mushroom Noodles",p:145},{n:"Hakka Noodles",p:140}
   ]},
-  {id:"pulao",icon:"🌾",title:"Pulao",items:[
-    {n:"Veg Pulao",p:125},{n:"Kashmir Pulao",p:175},{n:"Green Peas Pulao",p:145}
+  {id:"chinese-combo",icon:"🥢",title:"Chinese Combo",group:"Chinese",items:[
+    {n:"Half Paneer Fried Rice + Half Gobi Manchurian",p:175},
+    {n:"Half Veg Fried Rice + Half Paneer Manchurian",p:175}
   ]},
-  {id:"tandoor",icon:"🔥",title:"Tandoor & Starters",items:[
+  {id:"chinese-starters",icon:"🥡",title:"Chinese Starters",group:"Chinese",items:[
+    {n:"Gobi Manchurian",p:150},{n:"Babycorn Manchurian",p:155},{n:"Mushroom Manchurian",p:165},
+    {n:"Paneer Manchurian",p:165},{n:"Gobi Chilli",p:150},{n:"Babycorn Chilli",p:155},
+    {n:"Mushroom Chilli",p:165},{n:"Paneer Chilli",p:165},{n:"Gobi 65",p:150},
+    {n:"Paneer 65",p:165},{n:"Baby Corn 65",p:155},{n:"Mushroom 65",p:165},
+    {n:"Mushroom Pepper Dry",p:155},{n:"Gobi Pepper Fry",p:175},
+    {n:"Paneer Pepper Dry",p:165},{n:"Baby Corn Pepper Dry",p:175}
+  ]},
+  // ── SIDES & SNACKS ──
+  {id:"tandoor",icon:"🔥",title:"Tandoor & Starters",group:"Sides & Snacks",items:[
     {n:"Hara Bara Kabab",p:205},{n:"Paneer Tikka",p:205},{n:"Mushroom Kabab",p:195},
     {n:"Paneer Kabab",p:195},{n:"Mushroom Tikka",p:225}
   ]},
-  {id:"dosa",icon:"🥞",title:"Dosa",items:[
+  {id:"snacks",icon:"🥟",title:"Snacks",group:"Sides & Snacks",items:[
+    {n:"Maddur Vada",p:35},{n:"Rava Vada (3 pcs)",p:35},{n:"French Fries",p:115},
+    {n:"Undee Pakoda (3 pcs)",p:45},{n:"Mangalore Bajji (3 pcs)",p:45},{n:"Mangalore Buns",p:45},
+    {n:"Bonda Soup (2 pcs)",p:60},{n:"Mixed Bajji (5 pcs)",p:65},{n:"Onion Bonda (3 pcs)",p:45},
+    {n:"Bonda (3 pcs)",p:45},{n:"Palak / Onion / Ragi Pakoda",p:65},
+    {n:"Paddu-kuzhi Paniyaram Jamun (2 pcs)",p:45}
+  ]},
+  {id:"soup",icon:"🍵",title:"Soup",group:"Sides & Snacks",items:[
+    {n:"Tomato Soup",p:65},{n:"Veg Manchow Soup",p:85},{n:"Sweet Corn Soup",p:85},
+    {n:"Mushroom Soup",p:85},{n:"Hot & Sour Soup",p:85},
+    {n:"Lemon & Coriander Soup",p:95},{n:"Noodles Soup",p:85}
+  ]},
+  // ── DOSA ──
+  {id:"dosa",icon:"🥞",title:"Dosa",group:"Dosa",items:[
     {n:"Butter Plain Dosa",p:105},{n:"Masala Dosa",p:85},{n:"Ghee Masala Roast",p:105},
     {n:"Ghee Plain Roast Dosa",p:115},{n:"Plain Dosa",p:75},{n:"Open Butter Masala Dosa",p:115},
     {n:"Set Dosa",p:100},{n:"Kali Dosa",p:95},{n:"Rava Dosa",p:110},{n:"Ghee Rava Roast",p:130},
@@ -425,51 +483,13 @@ const MENU=[
     {n:"Ghee Podi Thatte Idli (1 pc)",p:70},{n:"Button Idli Plain",p:85},
     {n:"Ghee Paper Roast",p:125},{n:"Tomato Dosa",p:95},{n:"Butter Masala Dosa",p:105}
   ]},
-  {id:"soup",icon:"🍵",title:"Soup",items:[
-    {n:"Tomato Soup",p:65},{n:"Veg Manchow Soup",p:85},{n:"Sweet Corn Soup",p:85},
-    {n:"Mushroom Soup",p:85},{n:"Hot & Sour Soup",p:85},
-    {n:"Lemon & Coriander Soup",p:95},{n:"Noodles Soup",p:85}
-  ]},
-  {id:"lunch-meals",icon:"🍽️",title:"Lunch Meals",items:[
-    {n:"Mini South Meals",p:85},{n:"South Meals (Poori)",p:135},
-    {n:"South Meals (Chappati)",p:135},{n:"South Meal (Ragi Mudde)",p:140},
-    {n:"South Meal (Roti)",p:135},{n:"Mini Ragi Mudde Meals",p:85},
-    {n:"Ragi Extra Ball (1 pc)",p:25},{n:"Ragi Ball Meal",p:50},
-    {n:"North Meals",p:175},{n:"Curd Rice",p:70},{n:"Curd Extra",p:20},{n:"Extra Rice",p:45}
-  ]},
-  {id:"chinese-starters",icon:"🥡",title:"Chinese Starters",items:[
-    {n:"Gobi Manchurian",p:150},{n:"Babycorn Manchurian",p:155},{n:"Mushroom Manchurian",p:165},
-    {n:"Paneer Manchurian",p:165},{n:"Gobi Chilli",p:150},{n:"Babycorn Chilli",p:155},
-    {n:"Mushroom Chilli",p:165},{n:"Paneer Chilli",p:165},{n:"Gobi 65",p:150},
-    {n:"Paneer 65",p:165},{n:"Baby Corn 65",p:155},{n:"Mushroom 65",p:165},
-    {n:"Mushroom Pepper Dry",p:155},{n:"Gobi Pepper Fry",p:175},
-    {n:"Paneer Pepper Dry",p:165},{n:"Baby Corn Pepper Dry",p:175}
-  ]},
-  {id:"chinese-rice",icon:"🍚",title:"Chinese Rice",items:[
-    {n:"Garlic Fried Rice",p:155},{n:"Schezwan Fried Rice",p:130},
-    {n:"Vegetable Fried Rice",p:105},{n:"Paneer Fried Rice",p:155},
-    {n:"Mushroom Fried Rice",p:155},{n:"Baby Corn Fried Rice",p:145},
-    {n:"Garlic Schezwan Fried Rice",p:155},{n:"Singapore Fried Rice",p:185},
-    {n:"555 Fried Rice",p:205}
-  ]},
-  {id:"chinese-noodles",icon:"🍜",title:"Chinese Noodles",items:[
-    {n:"Baby Corn Noodles",p:130},{n:"Garlic Noodles",p:145},{n:"Sezwan Noodles",p:145},
-    {n:"Gobi Noodle",p:135},{n:"Veg Noodles",p:105},{n:"Paneer Noodles",p:145},
-    {n:"Mushroom Noodles",p:145},{n:"Hakka Noodles",p:140}
-  ]},
-  {id:"chinese-combo",icon:"🥢",title:"Chinese Combo",items:[
-    {n:"Half Paneer Fried Rice + Half Gobi Manchurian",p:175},
-    {n:"Half Veg Fried Rice + Half Paneer Manchurian",p:175}
-  ]},
-  {id:"north-curries",icon:"🫕",title:"North Curries",items:[
-    {n:"Baby Corn Tikka",p:185},{n:"Paneer Butter Masala",p:195},{n:"Kaju Masala",p:205},
-    {n:"Mushroom Masala",p:195},{n:"Veg Hyderabadi Masala",p:195},{n:"Veg Kolapuri",p:180},
-    {n:"Mix Veg Curry",p:165},{n:"Paneer Kadai",p:195},{n:"Kadai Mushroom",p:195},
-    {n:"Dal Tadka",p:145},{n:"Dal Fry",p:125},{n:"Aloo Jeera Dry",p:145},
-    {n:"Paneer Bhurji",p:195},{n:"Paneer Matar",p:195},{n:"Aloo Gobi Masala",p:155},
-    {n:"Green Peas Masala",p:165},{n:"Palak Paneer",p:185},{n:"Paneer Tikka Masala",p:205},
-    {n:"Paneer Kolapuri",p:195},{n:"Veg Kofta Curry",p:195},{n:"Veg Malai Kofta",p:195},
-    {n:"Subramanya Special Curry",p:230},{n:"Kadai Vegetable",p:175}
+  // ── BEVERAGES ──
+  {id:"coffee-tea",icon:"☕",title:"Coffee & Tea",group:"Beverages",items:[
+    {n:"Coffee",p:20},{n:"Tea",p:20},{n:"Black Tea",p:20},{n:"Ginger Tea",p:25},
+    {n:"Hot Badam Milk",p:35},{n:"Bournvita",p:35},{n:"Horlicks",p:35},{n:"Boost",p:35},
+    {n:"Tea (Jaggery)",p:25},{n:"Milk (one Cup)",p:20},{n:"Coffee (Jaggery)",p:25},
+    {n:"Black Coffee (Jaggery)",p:25},{n:"Black Coffee",p:20},{n:"Masala Tea",p:25},
+    {n:"Lemon Tea",p:25},{n:"Ginger Coffee",p:25},{n:"Green Tea",p:25},{n:"Kashaya",p:25}
   ]}
 ];
 
@@ -679,11 +699,12 @@ function render() {
   const content = document.getElementById('menuContent');
   const noRes = document.getElementById('noResults');
   
-  content.querySelectorAll('.menu-section').forEach(el => el.remove());
+  content.querySelectorAll('.menu-section, .course-group-header').forEach(el => el.remove());
   observer.disconnect();
   let totalFound = 0;
   
   const stats = getCartStats();
+  let lastGroup = null;
 
   MENU.forEach(cat => {
     let items = cat.items.filter(i => !q || i.n.toLowerCase().includes(q));
@@ -697,6 +718,16 @@ function render() {
     
     if(!items.length) return;
     totalFound += items.length;
+
+    // Insert course group divider when group changes
+    const groupName = cat.group || '';
+    if (groupName && groupName !== lastGroup) {
+      const divider = document.createElement('div');
+      divider.className = 'course-group-header';
+      divider.textContent = groupName;
+      content.appendChild(divider);
+      lastGroup = groupName;
+    }
 
     const sec = document.createElement('div');
     sec.className = 'menu-section'; sec.id = 'sec-' + cat.id;
